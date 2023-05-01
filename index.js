@@ -27,7 +27,7 @@ const getCountriesData = async () => {
   try {
     data = fs.readFileSync(cacheFile, 'utf8');
     const cacheAge = Date.now() - data.timestamp;
-    if (cacheAge < cacheMaxAge) {
+    if (cacheAge > cacheMaxAge) {
       throw new Error('Cache has expired');
     }
     data = JSON.parse(data);
