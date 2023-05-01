@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 import express from 'express';
+import cors from 'cors';
 
 const cacheFile = 'public/countries.json';
 const cacheMaxAge = 12 * 60 * 60 * 1000;
@@ -40,10 +41,12 @@ const getCountriesData = async () => {
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors());
+
 app.get('/', async (_, res) => {
   res.json(await getCountriesData());
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`TimezoneToCountryCodes listening on port ${port}`);
 });
